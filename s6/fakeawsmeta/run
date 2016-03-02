@@ -1,0 +1,25 @@
+#!/bin/sh
+
+TEMP_DIRECTORY="$(mktemp -d)"
+
+cd $TEMP_DIRECTORY
+
+for key in $(cat << EOF
+ami-id
+hostname
+instance-id
+instance-type
+local-hostname
+local-ipv4
+public-hostname
+public-ipv4
+placement/availability-zone
+EOF
+)
+do
+  curl -SsLO http://169.254.169.254/latest/meta-data/$key
+done
+
+echo -n '172.18.0.1' > local-ipv4
+
+python -m SimpleHTTPServer 65534

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+pgrep consul && pgrep docker && sleep 2
+
+if [ $? -ne 0 ]; then
+  echo 'nomad: not ready to start...'
+  sleep 1
+  exit 1
+fi
+
+export AWS_ENV_URL=http://127.0.0.1:65534/
+IPADDRESS=$(ifconfig eth0|awk -F ":" "/inet addr/ {print \$2}"|cut -d\  -f1)
+exec nomad agent -dev -bind=$IPADDRESS
