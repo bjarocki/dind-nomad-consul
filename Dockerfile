@@ -18,7 +18,7 @@ RUN apk update && \
     ln -s /lib/libc.musl-x86_64.so.1 /lib/ld-linux-x86-64.so.2
 
 ADD s6 /etc/s6
-ADD dnsmasq.d /etc/dnsmasq.d
+ADD etc /etc
 
 EXPOSE 4646
 EXPOSE 80
