@@ -9,7 +9,7 @@ upstream {{.Name}} {
 
 server {
   listen 80;
-  server_name {{.Name}}.service.consul;
+  server_name {{.Name}}.service.consul *.service.consul;
 
   charset utf-8;
 
