@@ -1,0 +1,5 @@
+template {
+  source = "/etc/consul-templates/nomad-http-service.conf.ctmpl"
+  destination = "/etc/nginx/sites-enabled/nomad-http-service.conf"
+  command = "pkill -HUP 'nginx: master'"
+}
