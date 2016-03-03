@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/local/bin/consul agent -server -data-dir /tmp/consul -bootstrap -bind 172.18.0.1
