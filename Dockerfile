@@ -16,6 +16,4 @@ RUN apk update && \
 ADD s6 /etc/s6
 ADD dnsmasq.d /etc/dnsmasq.d
 
-EXPOSE 4646
-
 CMD ["s6-svscan", "/etc/s6/"]
