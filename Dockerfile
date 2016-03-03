@@ -5,7 +5,7 @@ ENV NOMAD_URL https://releases.hashicorp.com/nomad/0.3.0/nomad_0.3.0_linux_amd64
 ENV CONSUL_TEMPLATE_URL https://releases.hashicorp.com/consul-template/0.13.0/consul-template_0.13.0_linux_amd64.zip
 
 RUN apk update && \
-    apk add python s6 dnsmasq && \
+    apk add python s6 dnsmasq nginx && \
     cd /tmp && \
     curl -SsLO $CONSUL_URL && \
     curl -SsLO $NOMAD_URL && \
