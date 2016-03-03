@@ -21,5 +21,6 @@ do
 done
 
 echo -n '172.18.0.1' > local-ipv4
+echo 'no backend available' > index.html
 
 python -m SimpleHTTPServer 65534
