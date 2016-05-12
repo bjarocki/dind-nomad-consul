@@ -35,6 +35,7 @@ echo "IMPORTANT: Wait until ./consul-services.sh respond with some services"
 echo
 echo "Now nomad is getting docker images necessary to run jobs defined in ./nomad-jobs directory"
 echo "This might get few minutes depending on your networking connection"
+echo
 echo "If you want to get there and look around run:"
 echo "ssh root@$CONTAINER_IP"
 echo "root password: nowthis"
