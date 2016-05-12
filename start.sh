@@ -28,8 +28,11 @@ if [ -f "$HOME/.ssh/known_hosts" ]; then
   ssh-keygen -q -f "$HOME/.ssh/known_hosts" -R 172.17.0.2 1>&2> /dev/null
 fi
 
+echo
+echo
 echo "Your container is ready \\o/"
-echo "Wait until ./consul-services.sh respond with some services"
+echo "IMPORTANT: Wait until ./consul-services.sh respond with some services"
+echo
 echo "Now nomad is getting docker images necessary to run jobs defined in ./nomad-jobs directory"
 echo "This might get few minutes depending on your networking connection"
 echo "If you want to get there and look around run:"
