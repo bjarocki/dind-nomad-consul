@@ -1,11 +1,11 @@
 FROM docker:dind
 
-ENV CONSUL_URL https://releases.hashicorp.com/consul/0.6.3/consul_0.6.3_linux_amd64.zip
-ENV NOMAD_URL https://releases.hashicorp.com/nomad/0.3.0/nomad_0.3.0_linux_amd64.zip
-ENV CONSUL_TEMPLATE_URL https://releases.hashicorp.com/consul-template/0.13.0/consul-template_0.13.0_linux_amd64.zip
+ENV CONSUL_URL https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip
+ENV NOMAD_URL https://releases.hashicorp.com/nomad/0.3.2/nomad_0.3.2_linux_amd64.zip
+ENV CONSUL_TEMPLATE_URL https://releases.hashicorp.com/consul-template/0.14.0/consul-template_0.14.0_linux_amd64.zip
 
 RUN apk update && \
-    apk add python s6 dnsmasq nginx && \
+    apk add python s6 dnsmasq nginx openssh jq && \
     cd /tmp && \
     curl -SsLO $CONSUL_URL && \
     curl -SsLO $NOMAD_URL && \
@@ -14,6 +14,7 @@ RUN apk update && \
     unzip -d /usr/local/bin nomad_*.zip && \
     unzip -d /usr/local/bin consul-template_*.zip && \
     rm -f *.zip && \
+    echo "root:nowthis" | chpasswd && \
     ln -s /lib /lib64 && \
     ln -s /lib/libc.musl-x86_64.so.1 /lib/ld-linux-x86-64.so.2
 
@@ -21,5 +22,6 @@ ADD etc /etc
 
 EXPOSE 4646
 EXPOSE 80
+EXPOSE 22
 
 CMD ["s6-svscan", "/etc/s6/"]

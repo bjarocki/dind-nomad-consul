@@ -10,4 +10,5 @@ fi
 
 export AWS_ENV_URL=http://127.0.0.1:65535/
 IPADDRESS=$(ifconfig eth0|awk -F ":" "/inet addr/ {print \$2}"|cut -d\  -f1)
-exec /usr/local/bin/nomad agent -dev -bind=$IPADDRESS
+echo export NOMAD_ADDR=http://$IPADDRESS:4646 > /root/.profile
+exec /usr/local/bin/nomad agent -dev -bind=$IPADDRESS -network-interface=docker0
