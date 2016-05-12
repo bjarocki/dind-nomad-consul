@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+NOMAD_JOBS_DIRECTORY=/nomad-jobs
+
+if [ -f /root/.profile ]; then
+  . /root/.profile
+fi
+  
+for jobfile in `find $NOMAD_JOBS_DIRECTORY -type f -name '*.json'`;do
+ echo "$(date) $jobfile" >> $NOMAD_JOBS_DIRECTORY/nomad.log
+ curl -XPOST -d @$jobfile $NOMAD_ADDR/v1/jobs
+ rm -f $jobfile
+done
+
+sleep 5

@@ -1,3 +1,38 @@
+upstream local-nomad-agent {
+  server 127.0.0.1:8500;
+}
+
+{{range services}}
+{{ if .Tags | contains "default-http-service" }}
+
+upstream default-{{.Name}} {
+  least_conn;
+  {{range service .Name}}server {{.Address}}:{{.Port}} max_fails=3 fail_timeout=60 weight=1;
+  {{else}}server 127.0.0.1:65535;{{end}}
+}
+
+server {
+  listen 80 default_server;
+
+  charset utf-8;
+
+  location /8f45d8a9-28b0-4581-bc99-bd58b257b7c9/ {
+    proxy_pass http://local-nomad-agent/;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+  }
+
+  location / {
+    proxy_pass http://default-{{.Name}};
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+  }
+}
+{{ end }}
+{{end}}
+
 {{range services}}
 {{ if .Tags | contains "http-service" }}
 

@@ -1,0 +1,112 @@
+{
+  "job": {
+    "Region": "global",
+    "ID": "eventstore",
+    "ParentID": "",
+    "Name": "eventstore",
+    "Type": "service",
+    "Priority": 50,
+    "AllAtOnce": false,
+    "Datacenters": [
+      "dc1"
+    ],
+    "Constraints": [
+      {
+        "LTarget": "${attr.kernel.name}",
+        "RTarget": "linux",
+        "Operand": "="
+      }
+    ],
+    "TaskGroups": [
+      {
+        "Name": "eventstore",
+        "Count": 1,
+        "Constraints": null,
+        "RestartPolicy": {
+          "Attempts": 10,
+          "Interval": 300000000000,
+          "Delay": 10000000000,
+          "Mode": "delay"
+        },
+        "Tasks": [
+          {
+            "Name": "eventstore",
+            "Driver": "docker",
+            "User": "",
+            "Config": {
+              "image": "eventstore/eventstore",
+              "port_map": [
+                {
+                  "store": 2113
+                }
+              ]
+            },
+            "Env": {
+              "EVENTSTORE_RUN_PROJECTIONS": "All"
+            },
+            "Services": [
+              {
+                "Name": "eventstore",
+                "Tags": null,
+                "PortLabel": "store",
+                "Checks": [
+                  {
+                    "Name": "alive",
+                    "Type": "tcp",
+                    "Command": "",
+                    "Args": null,
+                    "Path": "",
+                    "Protocol": "",
+                    "Interval": 10000000000,
+                    "Timeout": 2000000000
+                  }
+                ]
+              }
+            ],
+            "Constraints": null,
+            "Resources": {
+              "CPU": 500,
+              "MemoryMB": 256,
+              "DiskMB": 300,
+              "IOPS": 0,
+              "Networks": [
+                {
+                  "Device": "",
+                  "CIDR": "",
+                  "IP": "",
+                  "MBits": 10,
+                  "ReservedPorts": [
+                    {
+                      "Label": "store",
+                      "Value": 2113
+                    }
+                  ],
+                  "DynamicPorts": null
+                }
+              ]
+            },
+            "Meta": null,
+            "KillTimeout": 5000000000,
+            "LogConfig": {
+              "MaxFiles": 10,
+              "MaxFileSizeMB": 10
+            },
+            "Artifacts": null
+          }
+        ],
+        "Meta": null
+      }
+    ],
+    "Update": {
+      "Stagger": 10000000000,
+      "MaxParallel": 1
+    },
+    "Periodic": null,
+    "Meta": null,
+    "Status": "running",
+    "StatusDescription": "",
+    "CreateIndex": 10,
+    "ModifyIndex": 12,
+    "JobModifyIndex": 10
+  }
+}
