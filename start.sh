@@ -25,7 +25,7 @@ echo -n "$CONTAINER_IP" > $CONTAINER_IP_FILENAME
 
 # let me remove the old public key from know hosts so you don't get annoyed by ssh errors
 if [ -f "$HOME/.ssh/known_hosts" ]; then
-  ssh-keygen -q -f "$HOME/.ssh/known_hosts" -R 172.17.0.2 1>&2> /dev/null
+  ssh-keygen -q -f "$HOME/.ssh/known_hosts" -R $CONTAINER_IP 1>&2> /dev/null
 fi
 
 echo
