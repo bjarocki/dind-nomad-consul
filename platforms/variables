@@ -1,0 +1,19 @@
+JQ_COMMAND="$(which jq||true)"
+URL_FILENAME=".url"
+DOCKER_IMAGE_NAME="nt-local-dev-image"
+
+if [ $# -gt 1 ]; then
+  NODE_NAME=$1
+else
+  NODE_NAME=nt-local-dev
+fi
+
+# if you want to change this remember to update etc/consul-templates/nomad-http-service.conf.ctmpl
+CONSUL_RESERVED_URL=/8f45d8a9-28b0-4581-bc99-bd58b257b7c9
+
+if [ -z "$JQ_COMMAND" ]; then
+  echo "Please install jq by running:"
+  echo "OSX: brew install jq"
+  echo "Debian/Ubuntu: apt-get install jq"
+  exit 1
+fi

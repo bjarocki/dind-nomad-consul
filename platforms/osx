@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -e
+
+source platforms/common
+
+CONTAINER_ID="$(docker run -d --privileged -P --name $NODE_NAME $DOCKER_IMAGE_NAME)"
+SSH_PORT="$(docker inspect $CONTAINER_ID|$JQ_COMMAND -r '.[].NetworkSettings.Ports["22/tcp"][0].HostPort')"
+HTTP_PORT="$(docker inspect $CONTAINER_ID|$JQ_COMMAND -r '.[].NetworkSettings.Ports["80/tcp"][0].HostPort')"
+
+echo -n "http://localhost:$HTTP_PORT" > $URL_FILENAME
+
+echo
+echo
+echo "Your container is ready \\o/"
+echo "IMPORTANT: Wait until ./consul-services.sh respond with some services"
+echo
+echo "Now nomad is getting docker images necessary to run jobs defined in ./nomad-jobs directory"
+echo "This might get few minutes depending on your networking connection"
+echo
+echo "If you want to get there and look around run:"
+echo "ssh root@localhost -p $SSH_PORT"
+echo "root password: nowthis"
+echo
+echo "If you're looking for a pitches API try this:"
+echo "list pitches: curl -s http://localhost:$HTTP_PORT/queries/pitches"
+echo "create a pitch: curl -s -XPOST -H \"Content-Type:application/x-www-form-urlencoded\" -H \"Accept:application/json\" -d \"title=Man on the Moon.\" -d \"id=666\" \"http://localhost:$HTTP_PORT/commands/create_pitch\""
+echo
+echo "Slack @bartek.jarocki if you need help."

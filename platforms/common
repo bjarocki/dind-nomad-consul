@@ -1,0 +1,21 @@
+source platforms/variables
+
+needsudo() {
+  if [ $PLATFORM == "linux" ];then
+    sudo $@
+  else
+    $@
+  fi
+}
+
+build_docker_image() {
+  needsudo docker build -t $DOCKER_IMAGE_NAME .
+}
+
+IMAGE_ID=$(needsudo docker inspect $DOCKER_IMAGE_NAME 2> /dev/null | $JQ_COMMAND .[].Id)
+if [ -z "$IMAGE_ID" ];then
+  build_docker_image
+fi
+
+# make sure there's no old container before we start a new one
+needsudo docker rm -f $NODE_NAME || true
