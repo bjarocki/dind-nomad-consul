@@ -34,7 +34,7 @@
             "Driver": "docker",
             "User": "",
             "Config": {
-              "image": "docker-registry.service.consul/sb-pitching:b457b94",
+              "image": "docker-registry.service.consul/sb-pitching:1314bc9",
               "port_map": [
                 {
                   "rack": 8080
