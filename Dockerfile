@@ -14,7 +14,7 @@ RUN apk update && \
     unzip -d /usr/local/bin nomad_*.zip && \
     unzip -d /usr/local/bin consul-template_*.zip && \
     rm -f *.zip && \
-    echo "root:password" | chpasswd && \
+    echo "root:changeme" | chpasswd && \
     ln -s /lib /lib64 && \
     ln -s /lib/libc.musl-x86_64.so.1 /lib/ld-linux-x86-64.so.2
 

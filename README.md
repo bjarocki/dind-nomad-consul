@@ -1,10 +1,9 @@
 # Requirements
 ## Install Docker Beta for OSX
-- download https://dyhfha9j6srsj.cloudfront.net/Docker.dmg
-- get invitation code from @bartek.jarocki on slack
+- download https://download.docker.com/mac/beta/Docker.dmg
 
-## Connect to VPN
-- follow https://github.com/nowthisnews/devops/wiki/vpn-setup
+## Get JQ
+- brew install jq
 
 # Ready?
 - clone this repo

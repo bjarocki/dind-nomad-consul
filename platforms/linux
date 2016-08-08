@@ -24,7 +24,7 @@ echo "This might get few minutes depending on your networking connection"
 echo
 echo "If you want to get there and look around run:"
 echo "ssh root@$CONTAINER_IP"
-echo "root password: nowthis"
+echo "root password: changeme"
 echo
 echo "If you're looking for a pitches API try this:"
 echo "list pitches: curl -s http://$CONTAINER_IP/queries/pitches"
