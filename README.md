@@ -3,7 +3,7 @@
 - download https://download.docker.com/mac/beta/Docker.dmg
 
 ## Get JQ
-- brew install jq
+- `brew install jq`
 
 # Ready?
 - clone this repo
