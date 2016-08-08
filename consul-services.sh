@@ -16,4 +16,4 @@ if [ -z "$URL" ]; then
   exit 1
 fi
 
-curl -s http://$URL$CONSUL_RESERVED_URL/v1/catalog/services|$JQ_COMMAND .
+curl -s $URL$CONSUL_RESERVED_URL/v1/catalog/services|$JQ_COMMAND .

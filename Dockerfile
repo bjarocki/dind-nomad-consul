@@ -19,7 +19,7 @@ RUN apk update && \
     ln -s /lib/libc.musl-x86_64.so.1 /lib/ld-linux-x86-64.so.2
 
 ADD etc /etc
-ADD nomad-jobs /nomad-jobs
+# ADD nomad-jobs /nomad-jobs
 ADD var /var
 
 EXPOSE 4646
