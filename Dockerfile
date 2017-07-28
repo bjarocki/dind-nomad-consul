@@ -1,11 +1,11 @@
 FROM docker:dind
 
-ENV CONSUL_URL https://releases.hashicorp.com/consul/0.6.4/consul_0.6.4_linux_amd64.zip
-ENV NOMAD_URL https://releases.hashicorp.com/nomad/0.4.0/nomad_0.4.0_linux_amd64.zip
-ENV CONSUL_TEMPLATE_URL https://releases.hashicorp.com/consul-template/0.14.0/consul-template_0.14.0_linux_amd64.zip
+ENV CONSUL_URL https://releases.hashicorp.com/consul/0.9.0/consul_0.9.0_linux_amd64.zip
+ENV NOMAD_URL https://releases.hashicorp.com/nomad/0.6.0/nomad_0.6.0_linux_amd64.zip
+ENV CONSUL_TEMPLATE_URL https://releases.hashicorp.com/consul-template/0.19.0/consul-template_0.19.0_linux_amd64.zip
 
 RUN apk update && \
-    apk add python s6 dnsmasq nginx openssh jq && \
+    apk add python s6 dnsmasq nginx openssh jq curl && \
     cd /tmp && \
     curl -SsLO $CONSUL_URL && \
     curl -SsLO $NOMAD_URL && \
